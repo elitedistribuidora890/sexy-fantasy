@@ -528,6 +528,58 @@ footer{
   .name{font-size:13px}
   .desc{font-size:11.5px}
 }
+.image-viewer{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:99999;
+}
+
+.image-viewer.open{
+    opacity:1;
+    visibility:visible;
+}
+
+.image-viewer img{
+    width:auto;
+    max-width:95vw;
+    max-height:95vh;
+    object-fit:contain;
+    border-radius:18px;
+    cursor:zoom-out;
+}
+.card-img{
+    cursor:zoom-in;
+}
+.viewer-close{
+    position:absolute;
+    top:25px;
+    right:35px;
+    color:#fff;
+    font-size:42px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+@keyframes zoom{
+
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
 </style>
 </head>
 <body>
@@ -684,7 +736,7 @@ const products = [
     desc:"Aplicado no pênis antes da relação, aumenta o fluxo sanguíneo local e intensifica a sensibilidade, gerando sensação de aquecimento e maior volume percebido durante o ato.",
     price:24.90,
     badge:"INTENSIFICADOR MASCULINO",
-    image:"images/volume-maximo-new.jpeg"
+    image:"images/volume-maximo.jpeg"
   },
   {
     id:"pika-turbo",
@@ -1095,7 +1147,13 @@ function renderGrid(list = products){
       <article class="card">
         <div class="card-img-wrap">
           <span class="badge">${safeText(p.badge)}</span>
-          <img class="card-img" src="${safeText(p.image)}" alt="${safeText(p.name)}" loading="lazy">
+        <img
+    class="card-img"
+    src="${safeText(p.image)}"
+    alt="${safeText(p.name)}"
+    loading="lazy"
+    onclick="openImage('${safeText(p.image)}')"
+    style="cursor:zoom-in">
         </div>
         <div class="card-body">
           <div class="brand">${safeText(p.brand)}</div>
@@ -1275,6 +1333,42 @@ document.addEventListener("DOMContentLoaded", () => {
   filterProducts();
   renderCart();
 });
+function openImage(src){
+
+    document
+        .getElementById("viewerImg")
+        .src = src;
+
+    document
+        .getElementById("imageViewer")
+        .classList
+        .add("open");
+
+}
+
+function closeImage(){
+
+    document
+        .getElementById("imageViewer")
+        .classList
+        .remove("open");
+
+}
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="Escape")
+        closeImage();
+
+});
 </script>
+<!-- Visualizador da imagem -->
+<div id="imageViewer" class="image-viewer" onclick="closeImage()">
+
+    <span class="viewer-close">&times;</span>
+
+    <img id="viewerImg">
+
+</div>
 </body>
 </html>
