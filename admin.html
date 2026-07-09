@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sexy Fantasy Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070308;
+  --surface:#120916;
+  --surface2:#1b0d22;
+  --card:#160b1c;
+  --card2:#211027;
+  --pink:#ff2f7e;
+  --pink2:#d91462;
+  --gold:#f4b84c;
+  --green:#31d18b;
+  --red:#ff5573;
+  --blue:#39c9ff;
+  --text:#fff7fb;
+  --muted:#bfa5b4;
+  --line:rgba(255,255,255,.10);
+  --shadow:0 24px 70px rgba(0,0,0,.45);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(900px 420px at 20% -10%, rgba(255,47,126,.22), transparent 58%),
+    radial-gradient(700px 320px at 100% 0%, rgba(244,184,76,.10), transparent 55%),
+    var(--bg);
+  color:var(--text);
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.app{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  min-height:100vh;
+}
+.sidebar{
+  position:sticky;
+  top:0;
+  height:100vh;
+  background:rgba(18,9,22,.88);
+  backdrop-filter:blur(18px);
+  border-right:1px solid var(--line);
+  padding:18px;
+  overflow:auto;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:950;
+  letter-spacing:-.04em;
+  font-size:22px;
+  margin-bottom:20px;
+}
+.logo-mark{
+  width:42px;
+  height:42px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--pink),var(--pink2));
+  display:grid;
+  place-items:center;
+  box-shadow:0 8px 24px rgba(255,47,126,.25);
+}
+.logo span span{color:var(--pink)}
+.nav{
+  display:grid;
+  gap:8px;
+}
+.nav button{
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--muted);
+  padding:12px 13px;
+  border-radius:14px;
+  text-align:left;
+  font-weight:850;
+}
+.nav button.active,.nav button:hover{
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  border-color:var(--line);
+}
+.side-footer{
+  margin-top:18px;
+  border-top:1px solid var(--line);
+  padding-top:14px;
+  display:grid;
+  gap:8px;
+}
+.logout-btn{
+  background:rgba(255,85,115,.12);
+  color:#fff;
+  border:1px solid rgba(255,85,115,.25);
+  border-radius:14px;
+  height:44px;
+  font-weight:900;
+}
+.main{
+  min-width:0;
+  padding:18px;
+}
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px;
+}
+.topbar h1{
+  margin:0;
+  font-size:clamp(24px,3.8vw,38px);
+  letter-spacing:-.06em;
+}
+.topbar p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+.mobile-menu{
+  display:none;
+  background:linear-gradient(135deg,var(--pink),var(--pink2));
+  color:#fff;
+  border:0;
+  border-radius:14px;
+  height:44px;
+  padding:0 14px;
+  font-weight:950;
+}
+.user-pill{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.055);
+  border-radius:999px;
+  padding:10px 13px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:800;
+  max-width:260px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:18px;
+}
+.card{
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
+}
+.card h3{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.card .value{
+  margin-top:8px;
+  font-size:26px;
+  font-weight:950;
+  letter-spacing:-.05em;
+}
+.card small{color:var(--muted)}
+.section{
+  display:none;
+}
+.section.active{display:block}
+.panel{
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
+  margin-bottom:16px;
+}
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.panel-head h2{
+  margin:0;
+  letter-spacing:-.04em;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.field input,.field textarea,.field select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#24162b;
+  color:var(--text);
+  border-radius:14px;
+  padding:12px;
+  outline:none;
+}
+.field textarea{min-height:92px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:rgba(255,47,126,.7);
+  box-shadow:0 0 0 3px rgba(255,47,126,.12);
+}
+.full{grid-column:1/-1}
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.primary,.secondary,.danger{
+  border:0;
+  border-radius:14px;
+  height:46px;
+  padding:0 16px;
+  font-weight:950;
+}
+.primary{background:linear-gradient(135deg,var(--pink),var(--pink2));color:#fff}
+.secondary{background:rgba(255,255,255,.07);color:var(--text);border:1px solid var(--line)}
+.danger{background:rgba(255,85,115,.14);color:#fff;border:1px solid rgba(255,85,115,.25)}
+.table-wrap{
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:840px;
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:13px;
+  vertical-align:top;
+}
+th{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+td strong{font-size:14px}
+.status{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:12px;
+  font-weight:900;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--line);
+}
+.ok{color:var(--green)}
+.low{color:var(--gold)}
+.out{color:var(--red)}
+.img-thumb{
+  width:46px;
+  height:46px;
+  object-fit:cover;
+  border-radius:12px;
+  background:#0c050f;
+  border:1px solid var(--line);
+}
+.row-actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.mini-btn{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border-radius:10px;
+  height:34px;
+  padding:0 10px;
+  font-weight:850;
+  font-size:12px;
+}
+.toast{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:200;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:#fff;
+  border-radius:16px;
+  padding:14px 16px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:.2s;
+  max-width:330px;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+.login-screen{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:18px;
+}
+.login-box{
+  width:min(430px,100%);
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  padding:24px;
+}
+.login-box h1{
+  margin:0 0 8px;
+  letter-spacing:-.06em;
+  font-size:32px;
+}
+.login-box p{
+  margin:0 0 18px;
+  color:var(--muted);
+}
+.notice{
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(244,184,76,.25);
+  background:rgba(244,184,76,.08);
+  color:#ffe0a6;
+  font-size:13px;
+  line-height:1.45;
+}
+.expense-grid,.sale-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.sale-products{
+  display:grid;
+  gap:8px;
+}
+.sale-line{
+  display:grid;
+  grid-template-columns:1fr 90px 40px;
+  gap:8px;
+}
+.report-box{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+@media (max-width:1060px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .form-grid,.expense-grid,.sale-grid,.report-box{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .app{grid-template-columns:1fr}
+  .sidebar{
+    position:fixed;
+    z-index:160;
+    width:min(300px,86vw);
+    transform:translateX(-105%);
+    transition:.25s;
+  }
+  .sidebar.open{transform:translateX(0)}
+  .mobile-menu{display:inline-flex;align-items:center}
+  .main{padding:12px}
+  .topbar{align-items:flex-start}
+  .user-pill{display:none}
+  .cards{grid-template-columns:1fr 1fr;gap:10px}
+  .card{padding:13px}
+  .card .value{font-size:21px}
+  .form-grid,.expense-grid,.sale-grid,.report-box{grid-template-columns:1fr}
+  .panel{padding:13px;border-radius:18px}
+  .panel-head{align-items:flex-start;flex-direction:column}
+  .actions{display:grid;grid-template-columns:1fr}
+  .primary,.secondary,.danger{width:100%}
+  .sale-line{grid-template-columns:1fr 74px 38px}
+  table{min-width:760px}
+  .toast{left:12px;right:12px;bottom:12px;max-width:none}
+}
+@media (max-width:420px){
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="logo">
+      <div class="logo-mark">❤</div>
+      <span>sexy <span>admin</span></span>
+    </div>
+    <h1>Entrar no painel</h1>
+    <p>Use o e-mail e senha cadastrados no Firebase Authentication.</p>
+    <div class="field">
+      <label>E-mail</label>
+      <input type="email" id="loginEmail" placeholder="admin@email.com">
+    </div>
+    <div class="field">
+      <label>Senha</label>
+      <input type="password" id="loginPass" placeholder="Sua senha">
+    </div>
+    <div class="actions">
+      <button class="primary" onclick="login()">Entrar</button>
+    </div>
+    <div class="notice" style="margin-top:14px;">
+      Antes de usar: ative Authentication por Email/Senha, Firestore e Storage no Firebase.
+    </div>
+  </div>
+</div>
+
+<div class="app hidden" id="appScreen">
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <div class="logo-mark">❤</div>
+      <span>sexy <span>admin</span></span>
+    </div>
+    <nav class="nav">
+      <button class="active" onclick="showSection('dashboard',this)">🏠 Dashboard</button>
+      <button onclick="showSection('produtos',this)">📦 Produtos</button>
+      <button onclick="showSection('vendas',this)">🛒 Vendas</button>
+      <button onclick="showSection('despesas',this)">💸 Despesas</button>
+      <button onclick="showSection('relatorios',this)">📊 Relatórios</button>
+    </nav>
+    <div class="side-footer">
+      <button class="logout-btn" onclick="logout()">Sair</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <button class="mobile-menu" onclick="toggleMenu()">☰ Menu</button>
+        <h1>Painel Administrativo</h1>
+        <p>Controle de estoque, vendas, gastos e lucro.</p>
+      </div>
+      <div class="user-pill" id="userEmail">—</div>
+    </div>
+
+    <section class="section active" id="dashboard">
+      <div class="cards">
+        <div class="card"><h3>Total vendido</h3><div class="value" id="dashVendas">R$ 0,00</div><small>Entradas registradas</small></div>
+        <div class="card"><h3>Lucro bruto</h3><div class="value" id="dashLucro">R$ 0,00</div><small>Venda - custo</small></div>
+        <div class="card"><h3>Despesas</h3><div class="value" id="dashDespesas">R$ 0,00</div><small>Gastos cadastrados</small></div>
+        <div class="card"><h3>Saldo estimado</h3><div class="value" id="dashSaldo">R$ 0,00</div><small>Lucro - despesas</small></div>
+        <div class="card"><h3>Produtos</h3><div class="value" id="dashProdutos">0</div><small>Cadastrados</small></div>
+        <div class="card"><h3>Unidades</h3><div class="value" id="dashEstoque">0</div><small>No estoque</small></div>
+        <div class="card"><h3>Custo estoque</h3><div class="value" id="dashCustoEstoque">R$ 0,00</div><small>Valor investido</small></div>
+        <div class="card"><h3>Estoque baixo</h3><div class="value" id="dashBaixo">0</div><small>Produtos em alerta</small></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Alertas de estoque</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Produto</th><th>Categoria</th><th>Qtd</th><th>Mínimo</th><th>Status</th></tr></thead>
+            <tbody id="lowStockTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="produtos">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 id="productFormTitle">Cadastrar produto</h2>
+          <button class="secondary" onclick="clearProductForm()">Limpar</button>
+        </div>
+        <div class="form-grid">
+          <input type="hidden" id="productId">
+          <div class="field"><label>Nome</label><input id="pNome" placeholder="Ex: Love Lub Ice"></div>
+          <div class="field"><label>Categoria</label><input id="pCategoria" placeholder="Ex: Lubrificantes"></div>
+          <div class="field"><label>Marca</label><input id="pMarca" placeholder="Ex: La Pimienta"></div>
+          <div class="field"><label>Preço de custo</label><input id="pCusto" type="number" step="0.01" placeholder="0,00"></div>
+          <div class="field"><label>Preço de venda</label><input id="pVenda" type="number" step="0.01" placeholder="0,00"></div>
+          <div class="field"><label>Quantidade estoque</label><input id="pEstoque" type="number" placeholder="0"></div>
+          <div class="field"><label>Estoque mínimo</label><input id="pMinimo" type="number" placeholder="3"></div>
+          <div class="field"><label>Imagem</label><input id="pImagem" type="file" accept="image/*"></div>
+          <div class="field"><label>Status</label><select id="pAtivo"><option value="true">Ativo</option><option value="false">Oculto</option></select></div>
+          <div class="field full"><label>Descrição</label><textarea id="pDesc" placeholder="Descrição do produto"></textarea></div>
+        </div>
+        <div class="actions">
+          <button class="primary" onclick="saveProduct()">Salvar produto</button>
+          <button class="secondary" onclick="clearProductForm()">Cancelar edição</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Lista de produtos</h2>
+          <div class="field" style="min-width:260px;margin:0;">
+            <input id="productSearch" placeholder="Pesquisar na lista..." oninput="renderProductsTable()">
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Imagem</th><th>Produto</th><th>Categoria</th><th>Custo</th><th>Venda</th><th>Lucro un.</th><th>Qtd</th><th>Status</th><th>Ações</th></tr></thead>
+            <tbody id="productsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vendas">
+      <div class="panel">
+        <div class="panel-head"><h2>Registrar venda</h2></div>
+        <div class="sale-grid">
+          <div class="field"><label>Cliente</label><input id="vCliente" placeholder="Nome do cliente"></div>
+          <div class="field"><label>Telefone</label><input id="vTelefone" placeholder="WhatsApp"></div>
+          <div class="field"><label>Pagamento</label><select id="vPagamento"><option>Pix</option><option>Cartão</option><option>Dinheiro</option></select></div>
+          <div class="field"><label>Observação</label><input id="vObs" placeholder="Opcional"></div>
+        </div>
+        <div class="field full" style="margin-top:12px;">
+          <label>Produtos da venda</label>
+          <div class="sale-products" id="saleLines"></div>
+          <button class="secondary" style="margin-top:8px;" onclick="addSaleLine()">+ Produto</button>
+        </div>
+        <div class="actions">
+          <button class="primary" onclick="saveSale()">Salvar venda e baixar estoque</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>Vendas registradas</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Data</th><th>Cliente</th><th>Produtos</th><th>Total</th><th>Lucro</th><th>Pagamento</th><th>Ações</th></tr></thead>
+            <tbody id="salesTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="despesas">
+      <div class="panel">
+        <div class="panel-head"><h2>Cadastrar despesa</h2></div>
+        <div class="expense-grid">
+          <div class="field"><label>Descrição</label><input id="dDescricao" placeholder="Ex: Compra fornecedor"></div>
+          <div class="field"><label>Categoria</label><input id="dCategoria" placeholder="Fornecedor, gasolina, embalagem..."></div>
+          <div class="field"><label>Valor</label><input id="dValor" type="number" step="0.01" placeholder="0,00"></div>
+          <div class="field"><label>Data</label><input id="dData" type="date"></div>
+        </div>
+        <div class="actions">
+          <button class="primary" onclick="saveExpense()">Salvar despesa</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Despesas</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Valor</th><th>Ações</th></tr></thead>
+            <tbody id="expensesTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="relatorios">
+      <div class="report-box">
+        <div class="card"><h3>Ticket médio</h3><div class="value" id="repTicket">R$ 0,00</div></div>
+        <div class="card"><h3>Margem média</h3><div class="value" id="repMargem">0%</div></div>
+        <div class="card"><h3>Vendas</h3><div class="value" id="repQtdVendas">0</div></div>
+      </div>
+      <div class="panel" style="margin-top:16px;">
+        <div class="panel-head">
+          <h2>Resumo rápido</h2>
+          <button class="secondary" onclick="exportCSV()">Exportar produtos CSV</button>
+        </div>
+        <div class="notice">
+          Este painel calcula lucro bruto baseado em custo e venda. Para lucro líquido, subtraia despesas no bloco de saldo estimado.
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  deleteDoc,
+  onSnapshot,
+  serverTimestamp,
+  updateDoc,
+  increment,
+  writeBatch
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCrJ4dn3Nist72gOn6tZl8tUitauKnV4K4",
+  authDomain: "sexahop-d6c34.firebaseapp.com",
+  projectId: "sexahop-d6c34",
+  storageBucket: "sexahop-d6c34.firebasestorage.app",
+  messagingSenderId: "1029587076640",
+  appId: "1:1029587076640:web:bbad0e1224ef6746c6de45",
+  measurementId: "G-2Z33HXNLHL"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+let products = [];
+let sales = [];
+let expenses = [];
+let unsubProducts = null;
+let unsubSales = null;
+let unsubExpenses = null;
+
+const $ = id => document.getElementById(id);
+
+function moeda(v){
+  return Number(v || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+function n(v){ return Number(v || 0); }
+function safe(text){
+  return String(text ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function dateBR(value){
+  if(!value) return "—";
+  if(value.toDate) return value.toDate().toLocaleDateString("pt-BR");
+  if(typeof value === "string") return new Date(value+"T00:00:00").toLocaleDateString("pt-BR");
+  return "—";
+}
+function showToast(msg){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+window.login = async function(){
+  const email = $("loginEmail").value.trim();
+  const pass = $("loginPass").value.trim();
+  if(!email || !pass) return alert("Informe e-mail e senha.");
+  try{
+    await signInWithEmailAndPassword(auth,email,pass);
+  }catch(e){
+    alert("Erro ao entrar: " + e.message);
+  }
+}
+
+window.logout = async function(){
+  await signOut(auth);
+}
+
+onAuthStateChanged(auth, user => {
+  if(user){
+    $("loginScreen").classList.add("hidden");
+    $("appScreen").classList.remove("hidden");
+    $("userEmail").textContent = user.email;
+    startListeners();
+  }else{
+    $("loginScreen").classList.remove("hidden");
+    $("appScreen").classList.add("hidden");
+    stopListeners();
+  }
+});
+
+function startListeners(){
+  if(unsubProducts) return;
+
+  unsubProducts = onSnapshot(collection(db,"produtos"), snap => {
+    products = snap.docs.map(d => ({id:d.id,...d.data()}));
+    renderAll();
+  });
+
+  unsubSales = onSnapshot(collection(db,"vendas"), snap => {
+    sales = snap.docs.map(d => ({id:d.id,...d.data()}));
+    renderAll();
+  });
+
+  unsubExpenses = onSnapshot(collection(db,"despesas"), snap => {
+    expenses = snap.docs.map(d => ({id:d.id,...d.data()}));
+    renderAll();
+  });
+}
+function stopListeners(){
+  if(unsubProducts) unsubProducts();
+  if(unsubSales) unsubSales();
+  if(unsubExpenses) unsubExpenses();
+  unsubProducts = unsubSales = unsubExpenses = null;
+}
+
+window.toggleMenu = function(){
+  $("sidebar").classList.toggle("open");
+}
+
+window.showSection = function(id, btn){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  $(id).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  $("sidebar").classList.remove("open");
+}
+
+function renderAll(){
+  renderDashboard();
+  renderProductsTable();
+  renderSalesTable();
+  renderExpensesTable();
+  renderSaleLinesOptions();
+  renderReports();
+}
+
+function renderDashboard(){
+  const totalVendas = sales.reduce((s,v)=>s+n(v.total),0);
+  const lucro = sales.reduce((s,v)=>s+n(v.lucro),0);
+  const desp = expenses.reduce((s,d)=>s+n(d.valor),0);
+  const estoque = products.reduce((s,p)=>s+n(p.estoque),0);
+  const custoEstoque = products.reduce((s,p)=>s+n(p.custo)*n(p.estoque),0);
+  const baixos = products.filter(p=>n(p.estoque)<=n(p.estoqueMinimo)).length;
+
+  $("dashVendas").textContent = moeda(totalVendas);
+  $("dashLucro").textContent = moeda(lucro);
+  $("dashDespesas").textContent = moeda(desp);
+  $("dashSaldo").textContent = moeda(lucro-desp);
+  $("dashProdutos").textContent = products.length;
+  $("dashEstoque").textContent = estoque;
+  $("dashCustoEstoque").textContent = moeda(custoEstoque);
+  $("dashBaixo").textContent = baixos;
+
+  const lowRows = products
+    .filter(p=>n(p.estoque)<=n(p.estoqueMinimo))
+    .map(p=>`<tr><td><strong>${safe(p.nome)}</strong></td><td>${safe(p.categoria)}</td><td>${n(p.estoque)}</td><td>${n(p.estoqueMinimo)}</td><td>${stockStatus(p)}</td></tr>`)
+    .join("");
+  $("lowStockTable").innerHTML = lowRows || `<tr><td colspan="5">Nenhum alerta de estoque.</td></tr>`;
+}
+
+function stockStatus(p){
+  if(n(p.estoque)<=0) return `<span class="status out">🔴 Sem estoque</span>`;
+  if(n(p.estoque)<=n(p.estoqueMinimo)) return `<span class="status low">🟡 Baixo</span>`;
+  return `<span class="status ok">🟢 OK</span>`;
+}
+
+window.saveProduct = async function(){
+  const id = $("productId").value;
+  const file = $("pImagem").files[0];
+  let imagem = "";
+
+  if(file){
+    const fileRef = ref(storage, `produtos/${Date.now()}_${file.name}`);
+    await uploadBytes(fileRef,file);
+    imagem = await getDownloadURL(fileRef);
+  }
+
+  const produto = {
+    nome:$("pNome").value.trim(),
+    categoria:$("pCategoria").value.trim(),
+    marca:$("pMarca").value.trim(),
+    custo:n($("pCusto").value),
+    venda:n($("pVenda").value),
+    lucroUnitario:n($("pVenda").value)-n($("pCusto").value),
+    estoque:n($("pEstoque").value),
+    estoqueMinimo:n($("pMinimo").value),
+    descricao:$("pDesc").value.trim(),
+    ativo:$("pAtivo").value === "true",
+    atualizadoEm:serverTimestamp()
+  };
+
+  if(!produto.nome) return alert("Informe o nome do produto.");
+  if(imagem) produto.imagem = imagem;
+
+  try{
+    if(id){
+      await updateDoc(doc(db,"produtos",id), produto);
+      showToast("Produto atualizado.");
+    }else{
+      produto.criadoEm = serverTimestamp();
+      await addDoc(collection(db,"produtos"), produto);
+      showToast("Produto salvo no Firebase.");
+    }
+    clearProductForm();
+  }catch(e){
+    alert("Erro ao salvar: " + e.message);
+  }
+}
+
+window.editProduct = function(id){
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+  $("productId").value = p.id;
+  $("pNome").value = p.nome || "";
+  $("pCategoria").value = p.categoria || "";
+  $("pMarca").value = p.marca || "";
+  $("pCusto").value = p.custo || 0;
+  $("pVenda").value = p.venda || 0;
+  $("pEstoque").value = p.estoque || 0;
+  $("pMinimo").value = p.estoqueMinimo || 0;
+  $("pDesc").value = p.descricao || "";
+  $("pAtivo").value = String(p.ativo !== false);
+  $("productFormTitle").textContent = "Editar produto";
+  showSection("produtos", document.querySelectorAll(".nav button")[1]);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+window.clearProductForm = function(){
+  ["productId","pNome","pCategoria","pMarca","pCusto","pVenda","pEstoque","pMinimo","pDesc"].forEach(id=>$(id).value="");
+  $("pAtivo").value = "true";
+  $("pImagem").value = "";
+  $("productFormTitle").textContent = "Cadastrar produto";
+}
+
+window.deleteProduct = async function(id){
+  if(!confirm("Excluir este produto?")) return;
+  await deleteDoc(doc(db,"produtos",id));
+  showToast("Produto excluído.");
+}
+
+function renderProductsTable(){
+  const term = ($("productSearch")?.value || "").toLowerCase();
+  const filtered = products.filter(p => `${p.nome} ${p.categoria} ${p.marca}`.toLowerCase().includes(term));
+  $("productsTable").innerHTML = filtered.map(p=>`
+    <tr>
+      <td>${p.imagem ? `<img class="img-thumb" src="${safe(p.imagem)}">` : "—"}</td>
+      <td><strong>${safe(p.nome)}</strong><br><small>${safe(p.marca || "")}</small></td>
+      <td>${safe(p.categoria || "")}</td>
+      <td>${moeda(p.custo)}</td>
+      <td>${moeda(p.venda)}</td>
+      <td>${moeda(n(p.venda)-n(p.custo))}</td>
+      <td>${n(p.estoque)}</td>
+      <td>${stockStatus(p)}</td>
+      <td>
+        <div class="row-actions">
+          <button class="mini-btn" onclick="editProduct('${p.id}')">Editar</button>
+          <button class="mini-btn" onclick="deleteProduct('${p.id}')">Excluir</button>
+        </div>
+      </td>
+    </tr>
+  `).join("") || `<tr><td colspan="9">Nenhum produto cadastrado.</td></tr>`;
+}
+
+let saleLineCount = 0;
+window.addSaleLine = function(){
+  const id = "saleLine" + (++saleLineCount);
+  const div = document.createElement("div");
+  div.className = "sale-line";
+  div.id = id;
+  div.innerHTML = `
+    <select class="sale-product"></select>
+    <input class="sale-qty" type="number" min="1" value="1">
+    <button class="mini-btn" onclick="document.getElementById('${id}').remove()">×</button>
+  `;
+  $("saleLines").appendChild(div);
+  renderSaleLinesOptions();
+}
+function renderSaleLinesOptions(){
+  document.querySelectorAll(".sale-product").forEach(sel=>{
+    const val = sel.value;
+    sel.innerHTML = products.map(p=>`<option value="${p.id}">${safe(p.nome)} - ${moeda(p.venda)} (${n(p.estoque)})</option>`).join("");
+    if(val) sel.value = val;
+  });
+}
+window.saveSale = async function(){
+  const lines = [...document.querySelectorAll(".sale-line")].map(line=>{
+    const productId = line.querySelector(".sale-product").value;
+    const qtd = n(line.querySelector(".sale-qty").value);
+    const p = products.find(x=>x.id===productId);
+    if(!p || qtd <= 0) return null;
+    return {
+      productId:p.id,
+      nome:p.nome,
+      qtd,
+      custo:n(p.custo),
+      venda:n(p.venda),
+      total:n(p.venda)*qtd,
+      lucro:(n(p.venda)-n(p.custo))*qtd
+    };
+  }).filter(Boolean);
+
+  if(!lines.length) return alert("Adicione produtos na venda.");
+
+  const total = lines.reduce((s,l)=>s+l.total,0);
+  const lucro = lines.reduce((s,l)=>s+l.lucro,0);
+
+  try{
+    const batch = writeBatch(db);
+    const vendaRef = doc(collection(db,"vendas"));
+    batch.set(vendaRef,{
+      cliente:$("vCliente").value.trim(),
+      telefone:$("vTelefone").value.trim(),
+      pagamento:$("vPagamento").value,
+      observacao:$("vObs").value.trim(),
+      produtos:lines,
+      total,
+      lucro,
+      criadoEm:serverTimestamp()
+    });
+    lines.forEach(l=>{
+      batch.update(doc(db,"produtos",l.productId),{estoque:increment(-l.qtd), atualizadoEm:serverTimestamp()});
+    });
+    await batch.commit();
+    $("vCliente").value = "";
+    $("vTelefone").value = "";
+    $("vObs").value = "";
+    $("saleLines").innerHTML = "";
+    addSaleLine();
+    showToast("Venda salva e estoque atualizado.");
+  }catch(e){
+    alert("Erro ao salvar venda: " + e.message);
+  }
+}
+
+function renderSalesTable(){
+  const sorted = [...sales].sort((a,b)=>(b.criadoEm?.seconds||0)-(a.criadoEm?.seconds||0));
+  $("salesTable").innerHTML = sorted.map(v=>`
+    <tr>
+      <td>${dateBR(v.criadoEm)}</td>
+      <td><strong>${safe(v.cliente || "Cliente")}</strong><br><small>${safe(v.telefone || "")}</small></td>
+      <td>${(v.produtos||[]).map(p=>`${p.qtd}x ${safe(p.nome)}`).join("<br>")}</td>
+      <td>${moeda(v.total)}</td>
+      <td>${moeda(v.lucro)}</td>
+      <td>${safe(v.pagamento)}</td>
+      <td><button class="mini-btn" onclick="deleteSale('${v.id}')">Excluir</button></td>
+    </tr>
+  `).join("") || `<tr><td colspan="7">Nenhuma venda cadastrada.</td></tr>`;
+}
+window.deleteSale = async function(id){
+  if(!confirm("Excluir venda? O estoque não será restaurado automaticamente.")) return;
+  await deleteDoc(doc(db,"vendas",id));
+  showToast("Venda excluída.");
+}
+
+window.saveExpense = async function(){
+  const item = {
+    descricao:$("dDescricao").value.trim(),
+    categoria:$("dCategoria").value.trim(),
+    valor:n($("dValor").value),
+    data:$("dData").value || new Date().toISOString().slice(0,10),
+    criadoEm:serverTimestamp()
+  };
+  if(!item.descricao || !item.valor) return alert("Informe descrição e valor.");
+  await addDoc(collection(db,"despesas"), item);
+  $("dDescricao").value = "";
+  $("dCategoria").value = "";
+  $("dValor").value = "";
+  $("dData").value = "";
+  showToast("Despesa salva.");
+}
+function renderExpensesTable(){
+  const sorted = [...expenses].sort((a,b)=>String(b.data||"").localeCompare(String(a.data||"")));
+  $("expensesTable").innerHTML = sorted.map(d=>`
+    <tr>
+      <td>${dateBR(d.data)}</td>
+      <td><strong>${safe(d.descricao)}</strong></td>
+      <td>${safe(d.categoria)}</td>
+      <td>${moeda(d.valor)}</td>
+      <td><button class="mini-btn" onclick="deleteExpense('${d.id}')">Excluir</button></td>
+    </tr>
+  `).join("") || `<tr><td colspan="5">Nenhuma despesa cadastrada.</td></tr>`;
+}
+window.deleteExpense = async function(id){
+  if(!confirm("Excluir despesa?")) return;
+  await deleteDoc(doc(db,"despesas",id));
+  showToast("Despesa excluída.");
+}
+
+function renderReports(){
+  const totalVendas = sales.reduce((s,v)=>s+n(v.total),0);
+  const totalLucro = sales.reduce((s,v)=>s+n(v.lucro),0);
+  const ticket = sales.length ? totalVendas / sales.length : 0;
+  const margem = totalVendas ? (totalLucro / totalVendas) * 100 : 0;
+  $("repTicket").textContent = moeda(ticket);
+  $("repMargem").textContent = margem.toFixed(1) + "%";
+  $("repQtdVendas").textContent = sales.length;
+}
+
+window.exportCSV = function(){
+  const header = "nome,categoria,marca,custo,venda,estoque,estoqueMinimo\\n";
+  const rows = products.map(p=>[
+    p.nome,p.categoria,p.marca,p.custo,p.venda,p.estoque,p.estoqueMinimo
+  ].map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\\n");
+  const blob = new Blob([header+rows],{type:"text/csv;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "produtos-sexy-fantasy.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  addSaleLine();
+});
+</script>
+</body>
+</html>
