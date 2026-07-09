@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sexy Fantasy — Loja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070308;
+  --surface:#120916;
+  --surface2:#1b0d22;
+  --card:#160b1c;
+  --card2:#211027;
+  --pink:#ff2f7e;
+  --pink2:#d91462;
+  --gold:#f4b84c;
+  --text:#fff7fb;
+  --muted:#bfa5b4;
+  --line:rgba(255,255,255,.10);
+  --shadow:0 24px 70px rgba(0,0,0,.45);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(900px 420px at 20% -10%, rgba(255,47,126,.22), transparent 58%),
+    radial-gradient(700px 320px at 100% 0%, rgba(244,184,76,.10), transparent 55%),
+    var(--bg);
+  color:var(--text);
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(7,3,8,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  padding:14px 18px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:14px;
+  align-items:center;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-weight:900;
+  letter-spacing:-.04em;
+  font-size:22px;
+  white-space:nowrap;
+}
+.logo-mark{
+  width:38px;height:38px;border-radius:14px;
+  background:linear-gradient(135deg,var(--pink),var(--pink2));
+  display:grid;place-items:center;
+  box-shadow:0 8px 24px rgba(255,47,126,.25);
+}
+.logo span span{color:var(--pink)}
+.search{
+  position:relative;
+}
+.search input{
+  width:100%;
+  background:#fff;
+  color:#1a1018;
+  border:0;
+  height:48px;
+  border-radius:16px;
+  padding:0 46px 0 18px;
+  outline:none;
+  box-shadow:0 8px 28px rgba(0,0,0,.18);
+}
+.search i{
+  position:absolute;right:17px;top:50%;transform:translateY(-50%);
+  color:#5a4c58;font-style:normal;
+}
+.cart-btn{
+  height:48px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--surface2),var(--surface));
+  color:var(--text);
+  border-radius:16px;
+  display:flex;align-items:center;gap:9px;
+  padding:0 16px;
+  font-weight:800;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+.cart-count{
+  min-width:24px;height:24px;border-radius:999px;
+  display:grid;place-items:center;
+  background:var(--pink);color:#fff;font-size:12px;font-weight:900;
+}
+.hero{
+  width:min(1180px,100%);
+  margin:auto;
+  padding:26px 18px 18px;
+}
+.hero-box{
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,rgba(255,47,126,.14),rgba(255,255,255,.035));
+  border-radius:28px;
+  padding:24px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+  box-shadow:var(--shadow);
+}
+.hero h1{
+  margin:0 0 8px;
+  font-size:clamp(28px,4.5vw,48px);
+  line-height:1;
+  letter-spacing:-.06em;
+}
+.hero p{
+  margin:0;color:var(--muted);
+  max-width:610px;
+  line-height:1.5;
+  font-size:15px;
+}
+.hero-tags{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;
+}
+.hero-tags span{
+  border:1px solid var(--line);
+  background:rgba(0,0,0,.20);
+  padding:8px 11px;border-radius:999px;
+  font-size:12px;font-weight:800;
+}
+.hero-side{
+  min-width:180px;
+  text-align:right;
+  color:var(--gold);
+  font-weight:900;
+  font-size:14px;
+}
+.catalog{
+  width:min(1180px,100%);
+  margin:auto;
+  padding:8px 18px 90px;
+}
+.filters{
+  position:sticky;top:77px;z-index:40;
+  background:linear-gradient(180deg,rgba(7,3,8,.96),rgba(7,3,8,.76));
+  backdrop-filter:blur(12px);
+  padding:12px 0;
+  margin-bottom:10px;
+}
+.categories{
+  display:flex;gap:10px;overflow-x:auto;padding-bottom:3px;
+  -webkit-overflow-scrolling:touch;
+}
+.categories::-webkit-scrollbar{display:none}
+.categories button{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.055);
+  color:var(--text);
+  padding:10px 15px;
+  border-radius:999px;
+  white-space:nowrap;
+  font-size:13px;
+  font-weight:800;
+}
+.categories button.active{
+  background:linear-gradient(135deg,var(--pink),var(--pink2));
+  border-color:transparent;
+  box-shadow:0 10px 30px rgba(255,47,126,.22);
+}
+.section-head{
+  display:flex;align-items:end;justify-content:space-between;
+  gap:12px;
+  padding:18px 0;
+}
+.section-head h2{
+  margin:0;
+  font-size:27px;
+  letter-spacing:-.05em;
+}
+.section-head span{
+  color:var(--muted);font-size:13px;font-weight:700;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card{
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
+  min-width:0;
+}
+.card-img-wrap{
+  position:relative;
+  background:#0c050f;
+  overflow:hidden;
+}
+.card-img{
+  width:100%;
+  aspect-ratio:1/1.16;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  transition:transform .25s ease;
+}
+.card:hover .card-img{transform:scale(1.035)}
+.badge{
+  position:absolute;left:10px;top:10px;
+  background:rgba(0,0,0,.68);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:900;
+  max-width:calc(100% - 20px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.card-body{
+  padding:14px;
+  display:flex;flex-direction:column;gap:9px;
+  flex:1;
+}
+.brand{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.name{
+  margin:0;
+  font-size:16px;
+  line-height:1.18;
+  letter-spacing:-.03em;
+}
+.desc{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.42;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.meta{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.meta span{
+  font-size:11px;
+  color:#ead8e3;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:5px 8px;
+  font-weight:700;
+}
+.card-bottom{
+  margin-top:auto;
+  display:grid;
+  gap:9px;
+}
+.price{
+  font-size:20px;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.details-btn,.add-btn{
+  border:0;
+  height:42px;
+  border-radius:13px;
+  font-weight:900;
+  font-size:13px;
+}
+.details-btn{
+  background:rgba(255,255,255,.07);
+  color:var(--text);
+  border:1px solid var(--line);
+}
+.add-btn{
+  background:linear-gradient(135deg,var(--pink),var(--pink2));
+  color:#fff;
+}
+.add-btn.added{background:linear-gradient(135deg,#39c9ff,#128fbc)}
+.no-results{
+  grid-column:1/-1;
+  border:1px solid var(--line);
+  background:var(--surface);
+  border-radius:22px;
+  padding:28px;
+  text-align:center;
+  color:var(--muted);
+}
+.overlay{
+  position:fixed;inset:0;z-index:80;
+  background:rgba(0,0,0,.62);
+  opacity:0;pointer-events:none;
+  transition:.2s;
+}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;right:0;top:0;bottom:0;z-index:90;
+  width:min(430px,94vw);
+  background:var(--surface);
+  border-left:1px solid var(--line);
+  transform:translateX(105%);
+  transition:.28s ease;
+  display:flex;flex-direction:column;
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head,.drawer-foot{
+  padding:18px;
+  border-bottom:1px solid var(--line);
+}
+.drawer-foot{border-top:1px solid var(--line);border-bottom:0}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.drawer-head h3{margin:0;font-size:20px;letter-spacing:-.04em}
+.icon-btn{
+  width:38px;height:38px;border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);color:var(--text);
+  font-size:22px;
+}
+.drawer-items{
+  flex:1;overflow:auto;padding:16px 18px;
+}
+.empty-cart{
+  color:var(--muted);text-align:center;margin-top:50px;line-height:1.5;
+}
+.drawer-item{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.drawer-item img{
+  width:64px;height:64px;object-fit:cover;border-radius:14px;
+}
+.drawer-item .item-name{font-weight:800;font-size:13px;line-height:1.25}
+.line2{
+  margin-top:8px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.qty-control{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.055);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:4px;
+}
+.qty-control button{
+  width:27px;height:27px;border-radius:999px;
+  border:0;background:rgba(255,255,255,.10);color:var(--text);
+  font-weight:900;
+}
+.remove-link{
+  margin-top:7px;
+  background:none;border:0;color:var(--muted);padding:0;text-decoration:underline;font-size:12px;
+}
+.subtotal-row{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:12px;font-weight:900;
+}
+.checkout-btn,.send-btn{
+  width:100%;
+  border:0;
+  background:linear-gradient(135deg,var(--pink),var(--pink2));
+  color:#fff;
+  height:50px;
+  border-radius:15px;
+  font-weight:950;
+}
+.checkout-btn:disabled{opacity:.45;cursor:not-allowed}
+.modal{
+  position:fixed;inset:0;z-index:95;
+  display:grid;place-items:center;
+  padding:18px;
+  opacity:0;pointer-events:none;
+  transition:.2s;
+}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-box{
+  width:min(920px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+}
+.product-modal-content{
+  display:grid;
+  grid-template-columns:minmax(260px,420px) 1fr;
+  gap:0;
+}
+.product-modal-img{
+  width:100%;height:100%;min-height:420px;
+  object-fit:cover;object-position:top center;background:#0b050d;
+}
+.product-modal-info{
+  padding:24px;
+}
+.product-modal-info .cat{
+  color:var(--gold);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+}
+.product-modal-info h3{
+  margin:8px 0 12px;font-size:28px;line-height:1.05;letter-spacing:-.05em;
+}
+.product-modal-info p{
+  color:var(--muted);line-height:1.6;font-size:14px;
+}
+.detail-box{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.045);
+  border-radius:18px;
+  padding:14px;
+  margin:14px 0;
+  color:#ead8e3;
+  font-size:13px;
+  line-height:1.55;
+}
+.modal-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;
+}
+.modal-close{
+  position:absolute;right:16px;top:16px;
+}
+.checkout-modal-box{
+  width:min(490px,100%);
+  padding:24px;
+  position:relative;
+}
+.checkout-modal-box h3{margin:0 0 6px;font-size:24px;letter-spacing:-.04em}
+.checkout-modal-box .sub{color:var(--muted);font-size:13px;margin:0 0 18px}
+.field{margin-bottom:14px}
+.field label{display:block;color:var(--muted);font-size:12px;font-weight:900;text-transform:uppercase;margin-bottom:6px}
+.field input,.field textarea{
+  width:100%;border:1px solid var(--line);background:var(--card);
+  color:var(--text);border-radius:13px;padding:12px;outline:none;
+}
+.field textarea{min-height:70px;resize:vertical}
+.radio-group{display:grid;gap:8px}
+.radio-option{
+  border:1px solid var(--line);background:rgba(255,255,255,.045);
+  border-radius:13px;padding:11px;display:flex;gap:8px;align-items:center;
+}
+.radio-option input,.discreet-box input{accent-color:var(--pink)}
+.discreet-box{
+  display:flex;gap:10px;
+  border:1px solid rgba(244,184,76,.25);
+  background:rgba(244,184,76,.07);
+  border-radius:15px;
+  padding:12px;
+  margin:12px 0 16px;
+}
+.discreet-box span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+footer{
+  width:min(1180px,100%);
+  margin:auto;
+  padding:26px 18px 38px;
+  color:var(--muted);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  border-top:1px solid var(--line);
+  font-size:13px;
+}
+@media (max-width:960px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .product-modal-content{grid-template-columns:1fr}
+  .product-modal-img{min-height:360px;max-height:520px}
+}
+@media (max-width:680px){
+  .header-inner{grid-template-columns:1fr auto;gap:12px}
+  .search{grid-column:1/-1;order:3}
+  .logo{font-size:19px}
+  .logo-mark{width:34px;height:34px;border-radius:12px}
+  .cart-btn{height:42px;padding:0 12px}
+  .hero{padding:18px 12px 8px}
+  .hero-box{padding:16px;border-radius:22px;display:block}
+  .hero h1{font-size:26px}
+  .hero p{font-size:13.5px}
+  .hero-side{text-align:left;margin-top:12px;min-width:0}
+  .catalog{padding:6px 12px 70px}
+  .filters{top:115px}
+  .section-head h2{font-size:22px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .card-body{padding:11px;gap:7px}
+  .name{font-size:14px}
+  .desc{font-size:12px;-webkit-line-clamp:3}
+  .price{font-size:17px}
+  .actions{grid-template-columns:1fr}
+  .details-btn,.add-btn{height:39px}
+  .badge{font-size:10px;max-width:calc(100% - 16px);left:8px;top:8px}
+  .modal{padding:0;place-items:end center}
+  .modal-box{border-radius:24px 24px 0 0;max-height:92vh}
+  .product-modal-img{min-height:320px}
+  .product-modal-info{padding:18px}
+  .product-modal-info h3{font-size:23px}
+  .modal-actions{grid-template-columns:1fr}
+  .drawer{width:100vw}
+  footer{text-align:center;justify-content:center}
+}
+@media (max-width:380px){
+  .grid{gap:10px}
+  .name{font-size:13px}
+  .desc{font-size:11.5px}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">❤</div>
+      <span>sexy <span>fantasy</span></span>
+    </div>
+    <div class="search">
+      <input type="text" id="searchInput" placeholder="Buscar produto, categoria ou marca..." oninput="filterProducts()">
+      <i>⌕</i>
+    </div>
+    <button class="cart-btn" onclick="openDrawer()">🛒 Sacola <span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-box">
+    <div>
+      <h1>Loja Sexy Fantasy</h1>
+      <p>Produtos íntimos selecionados, com descrição clara, compra rápida e pedido finalizado pelo WhatsApp.</p>
+      <div class="hero-tags">
+        <span>Entrega discreta</span>
+        <span>Pix e cartão</span>
+        <span>Sigilo garantido</span>
+      </div>
+    </div>
+    <div class="hero-side">Catálogo online<br>pedido sem cadastro</div>
+  </div>
+</section>
+
+<section class="catalog" id="catalogo">
+  <div class="filters">
+    <div class="categories" id="categories"></div>
+  </div>
+
+  <div class="section-head">
+    <h2>Produtos</h2>
+    <span id="itemCountLabel">— produtos</span>
+  </div>
+
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<footer>
+  <span>© Sexy Fantasy — Loja online</span>
+  <span>Pedidos via WhatsApp: (11) 98013-9320</span>
+  <span>Entrega com embalagem discreta</span>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Sua sacola</h3>
+    <button class="icon-btn" onclick="closeAll()">×</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="subtotal-row"><span>Subtotal</span><span id="subtotalValue">R$ 0,00</span></div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()" disabled>Finalizar pedido</button>
+  </div>
+</div>
+
+<div class="modal" id="productModal">
+  <div class="modal-box" style="position:relative;">
+    <button class="icon-btn modal-close" onclick="closeProductModal()">×</button>
+    <div id="productModalContent"></div>
+  </div>
+</div>
+
+<div class="modal" id="checkoutModal">
+  <div class="modal-box checkout-modal-box">
+    <button class="icon-btn modal-close" onclick="closeAll()">×</button>
+    <h3>Finalizar pedido</h3>
+    <p class="sub">Preencha seus dados e confirme o envio no WhatsApp.</p>
+
+    <div class="field">
+      <label>Seu nome</label>
+      <input type="text" id="custName" placeholder="Como podemos te chamar?">
+    </div>
+
+    <div class="field">
+      <label>Bairro / cidade para entrega</label>
+      <input type="text" id="custLocation" placeholder="Ex: Antas, Bahia">
+    </div>
+
+    <div class="field">
+      <label>Forma de pagamento</label>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="payment" value="Pix" checked> Pix</label>
+        <label class="radio-option"><input type="radio" name="payment" value="Cartão na entrega"> Cartão na entrega</label>
+        <label class="radio-option"><input type="radio" name="payment" value="Dinheiro na entrega"> Dinheiro na entrega</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Observações</label>
+      <textarea id="custNotes" placeholder="Ponto de referência, horário preferido, sabor/cor se houver..."></textarea>
+    </div>
+
+    <div class="discreet-box">
+      <input type="checkbox" id="discreetCheck" checked>
+      <div>
+        <strong>Embalagem 100% discreta</strong>
+        <span>Sem nome da loja ou tipo de produto visível.</span>
+      </div>
+    </div>
+
+    <button class="send-btn" onclick="sendToWhatsApp()">Enviar pedido pelo WhatsApp</button>
+  </div>
+</div>
+
+<script>
+const WHATSAPP_NUMBER = "5511980139320";
+
+const products = [
+  {
+    id:"love-lub-ice",
+    category:"💧 Lubrificantes",
+    brand:"La Pimienta",
+    name:"Love Lub — Ice",
+    desc:"Reduz o atrito e facilita a penetração. Ao ser aplicado, gera uma leve sensação de frescor na pele. Fórmula à base de água, segura com preservativos e sem parabenos.",
+    price:22.90,
+    badge:"Lubrificante",
+    image:"images/love-lub.jpeg"
+  },
+  {
+    id:"love-lub-neutro",
+    category:"💧 Lubrificantes",
+    brand:"La Pimienta",
+    name:"Love Lub — Neutro",
+    desc:"Reduz o atrito durante o sexo, deixando a penetração mais confortável. Não tem cheiro nem efeito de esquenta/gela — indicado para quem tem pele sensível ou prefere um lubrificante neutro.",
+    price:22.90,
+    badge:"Lubrificante",
+    image:"images/love-lub.jpeg"
+  },
+  {
+    id:"love-lub-hot",
+    category:"💧 Lubrificantes",
+    brand:"La Pimienta",
+    name:"Love Lub — Hot",
+    desc:"Facilita a penetração e, ao entrar em contato com a pele, gera uma sensação de calor progressivo. Fórmula à base de água, compatível com preservativo e sem parabenos.",
+    price:22.90,
+    badge:"Lubrificante",
+    image:"images/love-lub.jpeg"
+  },
+  {
+    id:"volume-maximo",
+    category:"💙 Masculino",
+    brand:"Sexy Fantasy",
+    name:"Volume Máximo 15g",
+    desc:"Aplicado no pênis antes da relação, aumenta o fluxo sanguíneo local e intensifica a sensibilidade, gerando sensação de aquecimento e maior volume percebido durante o ato.",
+    price:24.90,
+    badge:"INTENSIFICADOR MASCULINO",
+    image:"images/volume-maximo-new.jpeg"
+  },
+  {
+    id:"pika-turbo",
+    category:"💙 Masculino",
+    brand:"Sexy Fantasy",
+    name:"Pika Turbo 15g",
+    desc:"Aplicado no pênis alguns minutos antes da relação, reduz levemente a sensibilidade local, ajudando a adiar a ejaculação e prolongar o momento a dois.",
+    price:25.99,
+    badge:"Gel retardante",
+    image:"images/pika-turbo.jpeg"
+  },
+  {
+    id:"sexy-pen",
+    category:"🍓 Comestíveis",
+    brand:"Sexy Fantasy",
+    name:"Sexy Pen — Caneta Comestível",
+    desc:"Caneta com gel comestível e saborizado, própria para desenhar ou passar sobre a pele durante a preliminar. Pode ser usada em qualquer parte do corpo, sem deixar residuo pegajoso.",
+    price:17.90,
+    badge:"Comestível",
+    image:"images/sexy-pen.jpeg"
+  },
+  {
+    id:"rapidinha",
+    category:"💧 Lubrificantes",
+    brand:"Sexy Fantasy",
+    name:"Lubrificante Beijável Rapidinha 30g",
+    desc:"Facilita a penetração com uma fórmula leve e saborizada, própria para uso durante o sexo oral. Disponível nos sabores Morango, Chiclete ou Neutro, dermatologicamente testado.",
+    price:15.99,
+    badge:"Lubrificante",
+    image:"images/rapidinha.jpeg"
+  },
+  {
+    id:"po-de-bruxa",
+    category:"⚡ Estimulantes",
+    brand:"Loka Sensação",
+    name:"Super Pó Mágico da Bruxinha",
+    desc:"Pó solúvel para misturar em qualquer bebida cerca de 30 minutos antes do encontro. Ajuda a aumentar a disposição, energia e desejo sexual.",
+    price:7.90,
+    badge:"Estimulante",
+    image:"images/super-po-magico.jpeg"
+  },
+   {
+    id:"volumao",
+    category:"💙 Masculino",
+    brand:"Sexy Fantasy",
+    name:"Volumao - Intesinficador Masculino 25g",
+    desc:"O Volumão - Intensificador Masculino foi desenvolvido para proporcionar uma experiência sensorial diferenciada durante os momentos íntimos. Sua fórmula conta com ingredientes selecionados que promovem uma agradável sensação de aquecimento e maior sensibilidade quando utilizado conforme as orientações do fabricante.",
+    price:24.90,
+    badge:"Comestível",
+    image:"images/volumao.jpeg"
+  },
+  {
+    id:"vela-sorvete-quente",
+    category:"🍓 Comestíveis",
+    brand:"Loka Sensação",
+    name:"Vela Comestível — Sorvete Quente",
+    desc:"Ao ser acesa e pingada sobre a pele, a cera derrete em uma calda morna e comestível — não queima e pode ser usada em brincadeiras sensoriais a dois. Vários sabores disponíveis.",
+    price:15.90,
+    badge:"Vela comestível",
+    image:"images/vela-sorvete-quente.jpeg"
+  },
+  {
+    id:"anel-peniano-vibro-duplo",
+    category:"💙 Masculino",
+    brand:"Sexy Fantasy",
+    name:"Anel Peniano Vibro Duplo",
+    desc:"Anel flexível que se encaixa na base do pênis durante a penetração, com dois motores de vibração que estimulam o clitóris simultaneamente. Acompanha baterias.",
+    price:18.99,
+    badge:"Estimulador",
+    image:"images/anel-peniano-vibro-duplo.jpeg"
+  },
+  {
+    id:"esquenta-e-gela",
+    category:"❤️ Feminino",
+    brand:"La Pimienta",
+    name:"Jato Sex — Esquenta e Gela",
+    desc:"Aplicado na região íntima, alterna sensações de calor e frio que estimulam a circulação local, deixando a área mais sensível ao toque. Fórmula beijável.",
+    price:17.90,
+    badge:"Gel excitante",
+    image:"images/esquenta-e-gela.jpeg"
+  },
+  {
+    id:"apertadinha",
+    category:"❤️ Feminino",
+    brand:"La Pimienta",
+    name:"Gel Adstringente e Lubrificante Apertadinha",
+    desc:"Aplicado internamente antes da relação, gera uma sensação temporária de maior contração e firmeza no canal vaginal. Também funciona como lubrificante beijável.",
+    price:19.90,
+    badge:"Adstringente",
+    image:"images/apertadinha-new.jpeg"
+  },
+  {
+    id:"goze-mais",
+    category:"❤️ Feminino",
+    brand:"Sexy Fantasy",
+    name:"Excitante Goze+ 4 em 1",
+    desc:"Aplicado no clitóris, aumenta a irrigação sanguínea local e intensifica a sensibilidade, ajudando a atingir a excitação de forma mais rápida e intensa.",
+    price:25.99,
+    badge:"Excitante feminino",
+    image:"images/goze-mais.jpeg"
+  },
+  {
+    id:"faisca-na-xavasca",
+    category:"❤️ Feminino",
+    brand:"Pepper Blend",
+    name:"Gel Excitante Faísca na Xavasca",
+    desc:"Gel com chocolate e pimenta que, ao ser aplicado na região íntima, gera uma sensação de calor crescente e aumenta a excitação do casal durante a preliminar.",
+    price:19.90,
+    badge:"Gel excitante",
+    image:"images/faisca-na-xavasca.jpeg"
+  },
+  {
+    id:"lanca-xanas",
+    category:"❤️ Feminino",
+    brand:"Sexy Fantasy",
+    name:"Excitante Feminino Lança Xanas",
+    desc:"Aplicado no clitóris, combina uma leve sensação de aquecimento com um toque refrescante, estimulando a região e intensificando a excitação.",
+    price:24.90,
+    badge:"Excitante feminino",
+    image:"images/lanca-xanas.jpeg"
+  },
+  {
+    id:"plug-anal",
+    category:"🍑 Anal",
+    brand:"Premium",
+    name:"Plug Anal em Aço Inoxidável — P",
+    desc:"Peça de aço inoxidável com base larga de segurança e ponta anatômica que facilita a inserção. Tamanho P, indicado para quem está começando na exploração anal.",
+    price:24.90,
+    badge:"Plug anal",
+    image:"images/plug-anal.jpeg"
+  },
+  {
+    id:"trepadeira",
+    category:"❤️ Feminino",
+    brand:"Hot Flowers",
+    name:"Excitante Trepadeira 15g",
+    desc:"Aplicado na região íntima, gera uma sensação progressiva de aquecimento que aumenta a sensibilidade local e intensifica a excitação.",
+    price:24.90,
+    badge:"Excitante feminino",
+    image:"images/trepadeira.jpeg"
+  },
+  {
+    id:"siriryka",
+    category:"❤️ Feminino",
+    brand:"Pepper Blend",
+    name:"Siriryka — Gel Funcional Feminino",
+    desc:"Gel de aplicação externa que combina três sensações — vibração, calor e frio — na região íntima feminina, estimulando a sensibilidade de forma gradual e confortável.",
+    price:22.90,
+    badge:"Gel funcional",
+    image:"images/siriryka.jpeg"
+  },
+  {
+    id:"perfume-de-calcinha",
+    category:"🍓 Comestíveis",
+    brand:"Banho de Gata",
+    name:"Perfume de Calcinha Beijável 40ml",
+    desc:"Borrifado na lingerie ou direto na pele, deixa uma fragrância agradável e sabor suave que pode ser sentido durante o sexo oral. Vários aromas disponíveis.",
+    price:14.90,
+    badge:"Perfume",
+    image:"images/perfume-de-calcinha.jpeg"
+  },
+  {
+    id:"prolong-black",
+    category:"💙 Masculino",
+    brand:"Chillies",
+    name:"Prolong Black — Gel Retardante Masculino",
+    desc:"Aplicado no pênis antes da relação, reduz levemente a sensibilidade local para ajudar a controlar o tempo até a ejaculação e prolongar a relação.",
+    price:14.90,
+    badge:"Gel retardante",
+    image:"images/prolong-black.jpeg"
+  },
+  {
+    id:"body-amor-fiel",
+    category:"👙 Lingeries",
+    brand:"Lingerie Sensual",
+    name:"Body Amor Fiel",
+    desc:"Peça única de lingerie em renda que cobre o corpo valorizando a silhueta, com fechamento fácil na parte inferior. Ideal para looks especiais a dois.",
+    price:99.90,
+    badge:"Lingerie",
+    image:"images/body-amor-fiel.jpeg"
+  },
+  {
+    id:"body-secretaria-domenica",
+    category:"👙 Lingeries",
+    brand:"Sexy Fantasy",
+    name:"Body Secretária Domenica",
+    desc:"Body com detalhes em transparência e renda, inspirado no estilo secretária. Peça única, com acabamento premium para looks de fantasia.",
+    price:99.90,
+    badge:"Lingerie",
+    image:"images/body-secretaria-domenica.jpeg"
+  },
+  {
+    id:"vibrador-capa-escalonada",
+    category:"🍆 Vibradores",
+    brand:"Sexy Fantasy",
+    name:"Vibrador com Capa Escalonada",
+    desc:"Vibrador com capa texturizada removível — use com a capa para uma estimulação mais suave, ou sem ela para um toque mais direto. Funciona a pilha.",
+    price:39.00,
+    badge:"Vibrador",
+    image:"images/vibrador-capa-escalonada.jpeg"
+  },
+  
+  {
+    id:"massageador-corporal",
+    category:"🍆 Vibradores",
+    brand:"Sexy Fantasy",
+    name:"Massageador Corporal com 2 Vibrações",
+    desc:"Massageador de corpo inteiro com 2 modos de vibração, pode ser usado em pontos de tensão muscular para relaxar ou na região íntima para estimulação.",
+    price:39.99,
+    badge:"Massageador",
+    image:"images/massageador-corporal.jpeg"
+  },
+  {
+    id:"masturbador-vagina",
+    category:"🖤 Masturbadores",
+    brand:"Bussy",
+    name:"Masturbador Lanterna com Vibro",
+    desc:"Masturbador masculino em formato de lanterna, com canal interno texturizado e vibração integrada. Material macio que simula sensação real.",
+    price:58.80,
+    badge:"Masturbador",
+    image:"images/masturbador-lanterna-bussy.jpeg"
+  },
+  {
+    id:"exotic-honey",
+    category:"⚡ Estimulantes",
+    brand:"Sexy Fantasy",
+    name:"Melzinho Masculino Exotic Honey 5g",
+    desc:"Sachê de mel estimulante para consumo oral, tomado cerca de 30 minutos antes da relação para ajudar a aumentar energia e disposição.",
+    price:7.00,
+    badge:"Estimulante",
+    image:"images/exotic-honey.jpeg"
+  },
+  {
+    id:"bella-adormecida",
+    category:"🍑 Anal",
+    brand:"Loka Sensação",
+    name:"Bella Adormecida — Anestésico Anal",
+    desc:"Aplicado na região anal antes da relação, reduz temporariamente a sensibilidade local, tornando a penetração mais confortável — sempre usar junto com lubrificante.",
+    price:15.90,
+    badge:"Anestésico",
+    image:"images/bella-adormecida.jpeg"
+  },
+  {
+    id:"algema-metal",
+    category:"⛓ Acessórios",
+    brand:"Sexy Fantasy",
+    name:"Algema de Metal com Pelúcia",
+    desc:"Prende os pulsos ou tornozelos do parceiro com segurança, revestimento de pelúcia para conforto e trava com chave inclusa. Várias cores disponíveis.",
+    price:20.99,
+    badge:"Acessório",
+    image:"images/algema-metal.jpeg"
+  },
+  {
+    id:"vibrador-ponto-g",
+    category:"🍆 Vibradores",
+    brand:"Sexy Fantasy",
+    name:"Vibrador Ponto G Golfinho Liso",
+    desc:"Formato curvado que se encaixa facilmente para estimular o Ponto G, com vibração forte e silenciosa. Compacto, à prova de discrição e fácil de higienizar.",
+    price:30.90,
+    badge:"Vibrador",
+    image:"images/vibrador-ponto-g-golfinho.jpeg"
+  },
+
+  {
+    id:"power-shock",
+    category:"🍆 Vibradores",
+    brand:"Sexy Fantasy",
+    name:"Power Shock — Vibrador Líquido 220V",
+    desc:"Spray beijável com sensação refrescante e estimulante, indicado para momentos a dois. Uso externo, efeito imediato e aplicação prática.",
+    price:34.90,
+    badge:"Vibrador líquido",
+    image:"images/power-shock.jpeg"
+  },
+  {
+    id:"sabonete-intimo",
+    category:"🧼 Higiene Íntima",
+    brand:"Soul Cosméticos",
+    name:"Sabonete Íntimo 200ml",
+    desc:"Sabonete íntimo para cuidado diário, com pH equilibrado e sensação de limpeza e frescor. Disponível em vários aromas.",
+    price:10.00,
+    badge:"Higiene íntima",
+    image:"images/sabonete-intimo.jpeg"
+  },
+  {
+    id:"calcinha-brilho-me-fode-forte",
+    category:"👙 Lingeries",
+    brand:"Sexy Fantasy",
+    name:"Calcinha Brilho — Me Fode Forte",
+    desc:"Calcinha sensual com frase picante, transparência e ajuste confortável. Ideal para presentear ou surpreender em momentos especiais.",
+    price:38.00,
+    badge:"Lingerie",
+    image:"images/calcinha-brilho-me-fode-forte.jpeg"
+  },
+  {
+    id:"exotic-honey-feminino",
+    category:"⚡ Estimulantes",
+    brand:"Sexy Fantasy",
+    name:"Melzinho Feminino Exotic Honey 5g",
+    desc:"Sachê estimulante feminino para consumo oral, indicado para aumentar energia, disposição e prazer antes do encontro.",
+    price:7.00,
+    badge:"Estimulante feminino",
+    image:"images/exotic-honey-feminino.jpeg"
+  },
+  {
+    id:"excitante-japones-super-hot",
+    category:"❤️ Feminino",
+    brand:"Sexy Fantasy",
+    name:"Excitante Japonês Super Hot",
+    desc:"Excitante de uso externo com sensação de aquecimento, desenvolvido para intensificar a sensibilidade e deixar o momento mais envolvente.",
+    price:14.90,
+    badge:"Excitante",
+    image:"images/excitante-japones-super-hot.jpeg"
+  },
+  {
+    id:"gel-beijavel-kiss-me",
+    category:"🍓 Comestíveis",
+    brand:"Soul Cosméticos",
+    name:"Gel Beijável Kiss Me 30ml",
+    desc:"Gel beijável com sabores variados, ideal para massagens, preliminares e brincadeiras sensoriais. Uso externo e saborizado.",
+    price:15.00,
+    badge:"Gel beijável",
+    image:"images/gel-beijavel-kiss-me.jpeg"
+  },
+];
+
+let cart = [];
+let currentCategory = "Todos";
+
+function formatBRL(v){
+  return v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+}
+
+function normalizeText(text){
+  return String(text || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function safeText(text){
+  return String(text || "").replace(/[&<>"']/g, m => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+  }[m]));
+}
+
+function productHighlights(p){
+  const text = normalizeText(`${p.name} ${p.badge} ${p.category} ${p.desc}`);
+  const tags = [];
+  if(text.includes("aquec")) tags.push("Aquecimento");
+  if(text.includes("refresc") || text.includes("gela") || text.includes("ice")) tags.push("Refrescante");
+  if(text.includes("beij") || text.includes("comest")) tags.push("Beijável");
+  if(text.includes("vibr")) tags.push("Vibração");
+  if(text.includes("retard")) tags.push("Retardante");
+  if(text.includes("sensib")) tags.push("Sensibilidade");
+  if(text.includes("anal")) tags.push("Anal");
+  if(text.includes("lingerie") || text.includes("body") || text.includes("calcinha")) tags.push("Lingerie");
+  if(text.includes("higiene") || text.includes("sabonete")) tags.push("Higiene");
+  if(!tags.length) tags.push(p.badge || "Produto");
+  return [...new Set(tags)].slice(0,3);
+}
+
+function createCategories(){
+  const div = document.getElementById("categories");
+  const cats = [...new Set(products.map(p => p.category || "Outros"))];
+
+  div.innerHTML = "";
+  const allBtn = document.createElement("button");
+  allBtn.type = "button";
+  allBtn.className = "active";
+  allBtn.textContent = "🔥 Todos";
+  allBtn.onclick = () => selectCategory("Todos", allBtn);
+  div.appendChild(allBtn);
+
+  cats.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = cat;
+    btn.onclick = () => selectCategory(cat, btn);
+    div.appendChild(btn);
+  });
+}
+
+function selectCategory(category, button){
+  currentCategory = category;
+  document.querySelectorAll(".categories button").forEach(btn => btn.classList.remove("active"));
+  if(button) button.classList.add("active");
+  filterProducts();
+}
+
+function filterProducts(){
+  const search = normalizeText(document.getElementById("searchInput").value);
+  const filtered = products.filter(p => {
+    const byCategory = currentCategory === "Todos" || p.category === currentCategory;
+    const searchable = normalizeText(`${p.name} ${p.brand} ${p.badge} ${p.category} ${p.desc}`);
+    return byCategory && (!search || searchable.includes(search));
+  });
+  renderGrid(filtered);
+}
+
+function renderGrid(list = products){
+  const grid = document.getElementById('productGrid');
+  if(!list.length){
+    grid.innerHTML = `<div class="no-results">Nenhum produto encontrado.<br>Tente outra categoria ou pesquise por outro nome.</div>`;
+    document.getElementById('itemCountLabel').textContent = "0 produtos";
+    return;
+  }
+
+  grid.innerHTML = list.map(p => {
+    const tags = productHighlights(p).map(t => `<span>${safeText(t)}</span>`).join("");
+    return `
+      <article class="card">
+        <div class="card-img-wrap">
+          <span class="badge">${safeText(p.badge)}</span>
+          <img class="card-img" src="${safeText(p.image)}" alt="${safeText(p.name)}" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="brand">${safeText(p.brand)}</div>
+          <h3 class="name">${safeText(p.name)}</h3>
+          <p class="desc">${safeText(p.desc)}</p>
+          <div class="meta">${tags}</div>
+          <div class="card-bottom">
+            <div class="price">${formatBRL(p.price)}</div>
+            <div class="actions">
+              <button class="details-btn" onclick="openProductModal('${p.id}')">Ver detalhes</button>
+              <button class="add-btn" id="btn-${p.id}" onclick="addToCart('${p.id}')">Adicionar</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  document.getElementById('itemCountLabel').textContent = list.length + (list.length === 1 ? " produto" : " produtos");
+}
+
+function openProductModal(id){
+  const p = products.find(item => item.id === id);
+  if(!p) return;
+
+  const tags = productHighlights(p).map(t => `<span>${safeText(t)}</span>`).join("");
+  document.getElementById("productModalContent").innerHTML = `
+    <div class="product-modal-content">
+      <img class="product-modal-img" src="${safeText(p.image)}" alt="${safeText(p.name)}">
+      <div class="product-modal-info">
+        <div class="cat">${safeText(p.category || p.badge)}</div>
+        <h3>${safeText(p.name)}</h3>
+        <div class="price">${formatBRL(p.price)}</div>
+        <div class="meta" style="margin-top:12px;">${tags}</div>
+        <div class="detail-box">
+          <strong>Descrição do produto</strong><br>
+          ${safeText(p.desc)}
+        </div>
+        <p><strong>Como comprar:</strong> adicione à sacola, informe seus dados e finalize o pedido diretamente pelo WhatsApp.</p>
+        <div class="modal-actions">
+          <button class="details-btn" onclick="closeProductModal()">Continuar vendo</button>
+          <button class="add-btn" onclick="addToCart('${p.id}'); closeProductModal(); openDrawer();">Adicionar à sacola</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('productModal').classList.add('open');
+}
+
+function closeProductModal(){
+  document.getElementById('productModal').classList.remove('open');
+  if(!document.getElementById('drawer').classList.contains('open') && !document.getElementById('checkoutModal').classList.contains('open')){
+    document.getElementById('overlay').classList.remove('open');
+  }
+}
+
+function addToCart(id){
+  const existing = cart.find(i => i.id === id);
+  if(existing) existing.qty++;
+  else cart.push({id, qty:1});
+
+  const btn = document.getElementById('btn-'+id);
+  if(btn){
+    btn.textContent = "Adicionado ✓";
+    btn.classList.add('added');
+    setTimeout(() => { btn.textContent = "Adicionar"; btn.classList.remove('added'); }, 900);
+  }
+  renderCart();
+}
+
+function changeQty(id, delta){
+  const item = cart.find(i => i.id === id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
+  renderCart();
+}
+
+function removeItem(id){
+  cart = cart.filter(i => i.id !== id);
+  renderCart();
+}
+
+function renderCart(){
+  const container = document.getElementById('drawerItems');
+  const totalQty = cart.reduce((s,i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = totalQty;
+
+  if(cart.length === 0){
+    container.innerHTML = '<div class="empty-cart">Sua sacola está vazia.<br>Adicione produtos para começar.</div>';
+    document.getElementById('subtotalValue').textContent = formatBRL(0);
+    document.getElementById('checkoutBtn').disabled = true;
+    return;
+  }
+
+  document.getElementById('checkoutBtn').disabled = false;
+  let subtotal = 0;
+  container.innerHTML = cart.map(item => {
+    const p = products.find(pp => pp.id === item.id);
+    if(!p) return "";
+    const lineTotal = p.price * item.qty;
+    subtotal += lineTotal;
+    return `
+      <div class="drawer-item">
+        <img src="${safeText(p.image)}" alt="${safeText(p.name)}">
+        <div>
+          <div class="item-name">${safeText(p.name)}</div>
+          <div class="line2">
+            <div class="qty-control">
+              <button onclick="changeQty('${p.id}', -1)">−</button>
+              <span>${item.qty}</span>
+              <button onclick="changeQty('${p.id}', 1)">+</button>
+            </div>
+            <strong>${formatBRL(lineTotal)}</strong>
+          </div>
+          <button class="remove-link" onclick="removeItem('${p.id}')">remover</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('subtotalValue').textContent = formatBRL(subtotal);
+}
+
+function openDrawer(){
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+}
+
+function openCheckout(){
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('checkoutModal').classList.add('open');
+  document.getElementById('drawer').classList.remove('open');
+}
+
+function closeAll(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.getElementById('productModal').classList.remove('open');
+}
+
+function sendToWhatsApp(){
+  const name = document.getElementById('custName').value.trim();
+  const location = document.getElementById('custLocation').value.trim();
+  const notes = document.getElementById('custNotes').value.trim();
+  const discreet = document.getElementById('discreetCheck').checked;
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+
+  if(!name || !location || cart.length === 0){
+    alert("Preencha seu nome, local de entrega e adicione ao menos um produto na sacola.");
+    return;
+  }
+
+  let subtotal = 0;
+  const itemLines = cart.map(item => {
+    const p = products.find(pp => pp.id === item.id);
+    const lineTotal = p.price * item.qty;
+    subtotal += lineTotal;
+    return `• ${item.qty}x ${p.name} — ${formatBRL(lineTotal)}`;
+  }).join('\n');
+
+  let msg = `*NOVO PEDIDO — Sexy Fantasy*\n\n`;
+  msg += `*Nome:* ${name}\n`;
+  msg += `*Local de entrega:* ${location}\n\n`;
+  msg += `*Produtos:*\n${itemLines}\n\n`;
+  msg += `*Subtotal:* ${formatBRL(subtotal)}\n\n`;
+  msg += `*Forma de pagamento:* ${payment}\n`;
+  msg += `*Entrega discreta:* ${discreet ? 'Sim, embalagem sem identificação' : 'Não é necessário'}\n`;
+  if(notes) msg += `*Observações:* ${notes}\n`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  createCategories();
+  filterProducts();
+  renderCart();
+});
+</script>
+</body>
+</html>
